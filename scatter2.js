@@ -496,7 +496,7 @@ class YAxis {
     }
 }
 
-d3.csv("../scatter_plot/data/un_data.csv", function(row) {
+d3.csv("../data/un_data.csv", function(row) {
     if(row.HDI_2017 >0 && row.GDP_2017 >0) {
         return {
             name: row.Country,
