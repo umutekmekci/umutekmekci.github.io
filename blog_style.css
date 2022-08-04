@@ -1,0 +1,84 @@
+body {
+    color: #404040;
+}
+
+h2 {
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 800;
+    line-height: 1.1;
+}
+
+.post-title{
+    font-size: 36px;
+    color: rgb(64, 64, 64)
+}
+
+a.post-read-more{
+    text-decoration: none;
+    color: inherit;
+    font-weight: 800;
+}
+
+a {
+    text-decoration: none;
+}
+
+.post-meta {
+    color: #808080;
+    font-size: 18px;
+    font-style: italic;
+}
+
+.post-summary {
+    font-size: 18px;
+}
+
+.header {
+    font-size: 27px;
+    line-height: 1.1;
+    font-weight: 300;
+    margin-left: 35%;
+    margin-bottom: 3rem;
+    margin-top: 1.5rem;
+}
+
+hr {
+    position: relative;
+    top: 15px;
+}
+
+.page-top {
+    width: 100%;
+    margin: 0 auto;
+    height: 100px;
+    border: 1px solid #EAEAEA;
+    background-color: #F5F5F5;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    font-weight: 200;
+}
+
+.top-page-title{
+    margin-right: auto;
+    margin-left: 10px;
+    font-size: 1.5rem;
+    font-weight:lighter;
+}
+
+.about-me, .github {
+    margin-right: 20px;
+    font-weight: bold;
+    font-size: 0.95rem;
+}
+
+.about-me > a,
+.github > a {
+    color: inherit;
+}
+
+a:hover,
+a:focus {
+  color: #0085a1;
+  cursor: pointer;
+}
