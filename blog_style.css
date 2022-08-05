@@ -45,9 +45,9 @@ a {
     margin-right:auto;
     width:50%;
     margin-bottom: 3rem;
-    margin-top: 1.5rem;
+    margin-top: 2.5rem;
     text-align: center;
-    border: 1px solid red
+    /*border: 1px solid red */
 }
 
 hr {
@@ -89,4 +89,19 @@ a:hover,
 a:focus {
   color: #0085a1;
   cursor: pointer;
+}
+
+.header-img {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background-image: url("imgs/keles.jpg");
+    border-radius: 100px;
+    top: 30px;
+    left: 47%;
+}
+
+.about-me-content{
+    text-align: center;
+    font-size: 1.5rem;
 }

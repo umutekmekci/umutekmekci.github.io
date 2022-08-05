@@ -59,9 +59,9 @@ class Article {
         summary.selectAll("a").data([self._ref]).join("a").attr("href", self._ref).attr("class", "post-read-more").html(" [Read more]")
         article.selectAll(`#hr${self.__index}`).data([""]).join("hr").attr("id", `hr${self.__index}`).style("width", "100%").style("opacity", "0.5")
         article
-        .transition()
-        .delay(2000)
-        .duration(5000)
+        //.transition()
+        //.delay(2000)
+        //.duration(5000)
         .style("transform", `translate(${self._tx}px, ${self._ty}px) rotate(${self._rot_deg}deg)`)
         if(this.__width !== undefined){
             article.style("width", self.__width + "px")
@@ -113,23 +113,23 @@ class Blog {
 const article1 = new Article()
 article1
 .ref("index_scatter.html")
-.header("Scatter Plot")
+.header("Interactive Scatter Plot")
 .meta("Posted on 03.08.2022")
-.summary("Here you can find scatter plot")
+.summary("Through interaction we will see how a two-dimensional plot can represent four-dimensional data.")
 
-const article2 = new Article()
-article2
-.ref("index_scatter.html")
-.header("Scatter Plot2")
-.meta("Posted on 03.08.2022")
-.summary("The Numba library allows you to achieve near C/C++/Fortran performance with your Python code without many code changes. This post will introduce the concept of Numba and compare the actual performance gain.")
+//const article2 = new Article()
+//article2
+//.ref("index_scatter.html")
+//.header("Scatter Plot2")
+//.meta("Posted on 03.08.2022")
+//.summary("The Numba library allows you to achieve near C/C++/Fortran performance with your Python code without many code changes. This post will introduce the concept of Numba and compare the actual performance gain.")
 
 const blog = new Blog()
 blog
 .width(window.innerWidth)
 .height(window.innerHeight)
 .append(article1)
-.append(article2)
+//.append(article2)
 .render()
 
 window.addEventListener('resize', (event) => {
