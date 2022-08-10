@@ -117,19 +117,19 @@ article1
 .meta("Posted on 03.08.2022")
 .summary("Through interaction we will see how a two-dimensional plot can represent four-dimensional data.")
 
-//const article2 = new Article()
-//article2
-//.ref("index_scatter.html")
-//.header("Scatter Plot2")
-//.meta("Posted on 03.08.2022")
-//.summary("The Numba library allows you to achieve near C/C++/Fortran performance with your Python code without many code changes. This post will introduce the concept of Numba and compare the actual performance gain.")
+const article2 = new Article()
+article2
+.ref("../snap/index.html")
+.header("Finger Snap")
+.meta("Posted on 03.08.2022")
+.summary("Implemantation of thanos finger snap")
 
 const blog = new Blog()
 blog
 .width(window.innerWidth)
 .height(window.innerHeight)
 .append(article1)
-//.append(article2)
+.append(article2)
 .render()
 
 window.addEventListener('resize', (event) => {
