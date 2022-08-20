@@ -5,7 +5,7 @@ const ST = performance.now()
 const WW = window.innerWidth
 const WH = window.innerHeight
 
-const container = d3.select(".container").style("transform", `translate(${WW * 0.3}px,${WH*0.3}px)`)
+const container = d3.select(".container").style("transform", `translate(${WW * 0.3}px,${WH*0.1}px)`)
 
 const imwidth = Number.parseInt(d3.select("#thanos").style("width").slice(0,-2))
 const imheight = Number.parseInt(d3.select("#thanos").style("height").slice(0,-2))

@@ -6,6 +6,122 @@
     <link rel="stylesheet" href="finger.css">
 </head>
 <body>
+    <div class="article">
+        <p>I think we've all seen the finger snapping effect of Thanos in the Avengers movie.
+            The effect of making prople gradually disappearing by disintegrating them into pieces.
+        </p>
+        <p>
+            In this article, I will try to make a similar effect. 
+            Our aim is to divide the picture we have uploaded into small parts and animate these parts independently of each other.
+        </p>
+        <p>
+            First, let's start by uploading the picture we will animate.
+        </p>
+        <div class="code">
+            const ctx = c.getContext("2d"); <br>
+            const img = document.getElementById("thanos"); <br>
+            ctx.drawImage(img, 0, 0, imwidth, imheight); <br>
+            const imgData = ctx.getImageData(0, 0, c.width, c.height);
+        </div>
+        <p>
+            We load the image and access the rgb (<span class="variable">imgData</span>) values. The variable <span class="variable">imgData</span> here is a one-dimensional array and holds 4 (r, g, b, a) values for each pixel.
+            
+            <br>if the size of the image is 590*350, the size of the variable <span class="variable">imgData</span> will be 590*350*4 = 826000.
+        </p>
+        <p>
+            Our next step will be to divide the picture into predetermined (eg 5*5) mini blocks and have each block drawn on its own canvas 
+            then shift these canvases to the right places with the help of the transform function. 
+        </p>
+        <p>First create the Minicanvas class</p>
+        <div class="code">
+            class MiniCanvas { <br>
+                &nbsp    constructor(){ <br>
+                    &nbsp &nbsp this.x = 0  //x coordinate of the canvas<br>
+                    &nbsp &nbsp this.y = 0 <br>
+                    &nbsp &nbsp this.data = null <br>
+                    &nbsp &nbsp this.i = 0  //index of the canvas<br>
+                    &nbsp &nbsp this.j = 0 <br>
+                    &nbsp &nbsp this.tx = 0  //how much translate in the x direction when the animation starts<br>
+                    &nbsp &nbsp this.ty = 0 <br>
+                &nbsp } <br>
+            }
+        </div>
+        <div class="code">
+            const bsize = 4  <br>
+            const nrow = imheight / bsize  <br>
+            const ncol = imwidth / bsize  <br>
+            let canvas_list = []  <br>
+            for(let i = 0; i < nrow; i++){  <br>
+                &nbsp   for(let j = 0; j < ncol; j++){  <br>
+                    &nbsp &nbsp      const tx = 200 + 200*Math.random()  <br>
+                    &nbsp &nbsp   const ty = -200 + 400*Math.random()   <br>
+                    &nbsp &nbsp let minicanvas = new MiniCanvas()  <br>
+                    &nbsp &nbsp let d = new Uint8ClampedArray(bsize * bsize * 4)  <br>
+                    &nbsp &nbsp setblock(d, i * bsize, j * bsize, bsize)  //fills array d from imgData with size bsize*bsize<br>
+                    &nbsp &nbsp minicanvas.i = i  <br>
+                    &nbsp &nbsp minicanvas.j = j  <br>
+                    &nbsp &nbsp minicanvas.x = j * (bsize)  <br>
+                    &nbsp &nbsp minicanvas.y = i * (bsize)  <br>
+                    &nbsp &nbsp minicanvas.data = d  <br>
+                    &nbsp &nbsp minicanvas.tx = tx  <br>
+                    &nbsp &nbsp minicanvas.ty = ty  <br>
+                    &nbsp &nbsp canvas_list.push(minicanvas) <br>
+                    &nbsp }  <br>
+            }
+        </div>
+        <p>
+            At this point, we have (imgHeight*imgWidth) / (bsize*bsize) mini canvas. 
+            Now it's time to place these canvases in their correct places and set the animation parameters. 
+            <br>We will use the d3 library to do this.
+        </p>
+        <div class="code">
+            container.selectAll(".minicanvas")  <br>
+            .data(canvas_list)  // bind the data<br>
+            .join("canvas")  // create canvas element for each item in canvas_list<br>
+            .attr("class", "minicanvas")  <br>
+            .attr("width", bsize)  <br>
+            .attr("height", bsize)  <br>
+            .style("width", bsize + "px")  <br>
+            .style("height", bsize + "px")  <br>
+            .style("position", "absolute")  <br>
+            .style("top", "0px")  <br>
+            .style("left", "0px")  <br>
+            //.style("filter", "blur(0px)")  <br>
+            .each(function(d){  <br>
+                &nbsp  const delay = delayScale(d.i * ncol + d.j)  //top-left element will start animation first and bottom-right element will be the last one<br>
+                &nbsp  const mc = d3.select(this)  <br>
+                &nbsp .style("transform",`translate(${d.x}px, ${d.y}px)`)  //translate this canvas to its place<br>
+                &nbsp .style("transition", `transform 10s ease-in ${delay}ms, opacity 10s ease-in ${delay}ms, width 10s ease-out ${delay}ms, height 10s ease-out ${delay}ms`)  <br>
+                &nbsp const ctx = mc.node().getContext("2d");  <br>
+                &nbsp ctx.putImageData(new ImageData(d.data, bsize, bsize), 0, 0)  //draw the data on the canvas<br>
+            })
+        </div>
+        <p>
+            The line """.style("transition", `transform 10s ease-in ${delay}ms, opacity 10s ease-in ${delay}ms, width 10s ease-out ${delay}ms, height 10s ease-out ${delay}ms`)""" <br>
+            tells to the browser that we want to animate transform, opacity, width and height properties with 10s duration after {delay}ms.
+        </p>
+        <p>
+            Now there are two images superimposed on the screen. 
+            By making the opacity value of the original picture at the bottom 0, 
+            we show it as if it does not exist on the screen. 
+            <br>The last step is to start the animation by changing these values.
+        </p>
+        <div class="code">
+            d3.select("button").on("click", function(){  <br>
+                &nbsp    const ss = performance.now()  <br>
+                &nbsp container.selectAll(".minicanvas")  <br>
+                &nbsp .style("transform",d => `translate(${d.x + d.tx}px, ${d.y + d.ty}px)`)  <br>
+                &nbsp .style("opacity", 0)  <br>
+                &nbsp .style("width", "0px")  <br>
+                &nbsp .style("height", "0px")  <br>
+                &nbsp const elapsed = performance.now() - ss  <br>
+                &nbsp console.log(elapsed)  <br>
+            })
+        </div>
+        <p>
+            You can see the result of the animation by clicking the snap button below.
+        </p>
+    </div>
     <div class="container">
         <img id="thanos" src="../imgs/ozgur.jpeg" alt="The Scream" width="200" height="200">
         <canvas></canvas>
