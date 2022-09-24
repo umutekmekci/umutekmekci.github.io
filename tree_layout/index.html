@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <title>Tree Layout Techiques</title>
+</head>
+<body>
+<div class="article">
+    <h1>How to layout a tree</h1>
+    <p>In this article, I will try to explain how we can draw a tree to the screen when we have a tree structure in json format.
+    </p>
+    <p>
+        In general, there are two strategies, the first is to draw the leaves at the same level, 
+        and the second is to draw the nodes that have the same parent at the same level.
+    </p>
+    <p>
+        Lets see the difference between two strategies.
+    </p>
+    <div id="first-draw">
+        <svg width="500" height="500" id="same-leaf"></svg>
+        <svg width="500" height="500" id="same-level"></svg>
+    </div>
+    <p>
+        Throughout the article we will focus on the following tree structure.
+    </p>
+    <div id="small-tree">
+        <svg width="1000" height="250" id="small-tree-svg"></svg>
+    </div>
+    <p>
+        In the first structure leafs are aligned and in the second structure nodes that have same parent are aligned.
+        Each 2 by 3 or 3 by 2 rectangle above represents a tree. The height represents the level of the tree and width is equal to the maximum number of children a node have.
+        For example, any node of the tree corresponding to the first shape has a maximum of two children and its has 3 levels.
+
+    </p>
+    <p>
+        <span class="solution">We will start building the solution from the leafs and when we encounter a node that is not a leaf we will let this parent node to decide the layout of its children.
+        Because only parent node knows the solutions of each child node and can combine these solutions into the desired solution. </span>
+        <br>Lets see the code that makes this happen.
+    </p>
+    <div class="code">
+
+        def make_leafs_same_level(self, H, children): <br>
+        &nbsp for child in children: <br>
+        &nbsp &nbsp child.ty = H - child.H + 1 <br><br>
+
+        def evaluate_results(self, results): <br>
+        &nbsp l = len(results)  <br>
+        &nbsp W = 0  <br>
+        &nbsp H = 0  <br>
+        &nbsp for res in results: <br>
+        &nbsp &nbsp width, height = res <br>
+        &nbsp &nbsp W += width <br>
+        &nbsp &nbsp H = max(H, height) <br>
+        &nbsp return W, H <br><br>
+
+    def _layout(self, node): <br>
+    &nbsp results = [] <br>
+    &nbsp if node.children is not None: <br>
+    &nbsp &nbsp   for child in node.children: <br>
+    &nbsp &nbsp &nbsp  W, H = self._layout(child) <br>
+    &nbsp &nbsp &nbsp child.W = W <br>
+    &nbsp &nbsp &nbsp child.H = H <br>
+    &nbsp &nbsp &nbsp results.append((W, H)) <br>
+    &nbsp width, height = self.evaluate_results(results) <br>
+    &nbsp self.make_leafs_same_level(height, node.children) <br>
+    &nbsp self.calc_tx(width, node.children) <br>
+    &nbsp return width + 1 if width == 0 else width, height + 1 <br>
+    </div>
+    <p>
+       make_leafs_same_level function aligns the bottom of the rectangles, which is exactly what we defined above. <br>
+       calc_tx calculates the relative positions of each child node according to its parent. Lets see it definition 
+    </p> 
+    <div class="code">
+
+        def calc_tx(self, W, children): <br>
+        &nbsp middle = W / 2 <br>
+        &nbsp s = 0 <br>
+        &nbsp for child in children: <br>
+        &nbsp &nbsp    x = s + child.W / 2 <br>
+        &nbsp &nbsp    child.tx = x-middle <br>
+        &nbsp &nbsp    s = s + child.W <br>
+    </div>
+    <p>
+        <span class="solution">Keeping the information of how much each node will translate relative to its parent will make it very easy for us to draw the nodes, 
+        because once the root node is placed, all the nodes will automatically adjust themselves according to their parent. </span>
+    </p>
+    <p>
+        The drawing logic is easy as seen below.
+    </p>
+    <div class="code">
+
+        function draw(tree, parent_selection) <br>
+        &nbsp const g = parent_selection.append("g") <br>
+        &nbsp .attr("transform",`translate(${tree.tx * gxs}, ${tree.ty * gys})`) <br> <br>
+    
+        &nbsp const r = 20 <br>
+        &nbsp const circ = g.append("circle") <br>
+        &nbsp .attr("cx", 0) <br>
+        &nbsp .attr("cy", 0) <br>
+        &nbsp .attr("r", r) <br>
+        &nbsp .attr("stroke", "red") <br>
+        &nbsp .attr("fill", "rgba(0,0,0,0)") <br> <br>
+
+        &nbsp for(i = 0; i&#60;tree.children.length; i++){  <br>
+            &nbsp &nbsp     draw(tree.children[i], g)  <br>
+        } <br>
+    </div>    
+    <p>
+        As always you can see the full code in the ource file of this article.
+    </p>
+
+<script src="levels_same.js" type="module"></script>
+</body>
+</html>

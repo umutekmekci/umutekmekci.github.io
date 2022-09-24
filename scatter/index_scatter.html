@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title> Blog </title>
+    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <title>Annual GDP compared to HDI (2017)</title>
+</head>
+<body>
+<div class="article">
+    <h1>Scatter Plot</h1>
+    <p>In this article, I will try to explain how to draw a scatter plot from scratch with the help of the d3 library. <br> 
+        At the same time, we will see how the interaction with the data can transfer a five-dimensional data to the two-dimensional plane in an understandable way.
+    </p>
+    <p>
+        The content of the data is not of interest to us at the moment, but we can say that the data consists of two continuous and three discrete dimensions.
+        The relation between continuous variables will be shown on the x and y axis and the discrete dimensions will be shown using radius, color and tooltips.
+    </p>
+    <p>
+        Lets see the main function of our script
+    </p>
+    <div class="code">
+        let xaxis = new XAxis() <br>
+        xaxis <br>
+        &nbsp .header("Human Development Index(HDI)") <br>
+        &nbsp .range(xrange) <br>
+        &nbsp .show_domain(false) <br>
+        &nbsp .margin(20) <br> <br>
+    
+        let yaxis = new YAxis() <br>
+        yaxis <br>
+        &nbsp .header("Annual GDP per capita(USD)") <br>
+        &nbsp .range(yrange) <br>
+        &nbsp .show_domain(true) <br>
+        &nbsp .margin(20) <br>
+    
+        const color_map = d3.scaleOrdinal(d3.schemeDark2); <br> <br>
+    
+        let legend = new Legend() <br>
+        &nbsp .labels(legend_labels) <br>
+        &nbsp .colors(legend_colors) <br> <br>
+    
+        let figure = new Figure() <br>
+        figure <br>
+        &nbsp .id("hdi") <br>
+        &nbsp .width(400) <br>
+        &nbsp .height(400) <br>
+        &nbsp .xaxis(xaxis) <br>
+        &nbsp .yaxis(yaxis) <br>
+        &nbsp .grid(true) <br>
+        &nbsp .legend(legend) <br>
+        &nbsp .dimx(dataset.map(d => d.hdi) <br>)
+        &nbsp .dimy(dataset.map(d => d.gdp)) <br>
+        &nbsp .dimr(dataset.map(d => d.population)) <br>
+        &nbsp .dimc(dataset.map(d => d.continent).map(d => color_map(d))) <br>
+        &nbsp .dimtt(dataset.map(d => d.name)) <br>
+        &nbsp .translate(50, 50) <br>
+        &nbsp .draw() <br>
+    </div>
+    <p>
+       As seen in the code, we start by creating axes first, then we create the legend and at last we create our figure.
+       We provide five different data that will be included in the figure. 
+    </p> 
+    <p>
+        Data we provide to the dimx and dimy function represents the data shown on the x and y axis, dimr is for the radius of circles, dimc is for the color and
+        dimtt is for tooltip.  
+    </p>
+<svg width="1800" height="1200"></svg>
+<script src="scatter.js" type="module"></script>
+</body>
+</html>

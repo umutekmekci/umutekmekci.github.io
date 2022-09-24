@@ -112,7 +112,7 @@ class Blog {
 
 const article1 = new Article()
 article1
-.ref("index_scatter.html")
+.ref("../scatter/index_scatter.html")
 .header("Interactive Scatter Plot")
 .meta("Posted on 03.08.2022")
 .summary("Through interaction we will see how a two-dimensional plot can represent four-dimensional data.")
@@ -124,12 +124,20 @@ article2
 .meta("Posted on 03.08.2022")
 .summary("Implemantation of thanos finger snap")
 
+const article3 = new Article()
+article3
+.ref("../tree_layout/index.html")
+.header("Tree Layout Algorithm")
+.meta("Posted on 24.09.2022")
+.summary("How to layout and draw a tree given as a json format")
+
 const blog = new Blog()
 blog
 .width(window.innerWidth)
 .height(window.innerHeight)
 .append(article1)
 .append(article2)
+.append(article3)
 .render()
 
 window.addEventListener('resize', (event) => {
