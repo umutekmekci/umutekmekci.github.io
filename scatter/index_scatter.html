@@ -9,12 +9,34 @@
 <body>
 <div class="article">
     <h1>Scatter Plot</h1>
-    <p>In this article, I will try to explain how to draw a scatter plot from scratch with the help of the d3 library. <br> 
-        At the same time, we will see how the interaction with the data can transfer a five-dimensional data to the two-dimensional plane in an understandable way.
+    <p>In this article we will see how the interaction with the data can transfer a five-dimensional data to the two-dimensional plane in an understandable way.
     </p>
     <p>
         The content of the data is not of interest to us at the moment, but we can say that the data consists of two continuous and three discrete dimensions.
         The relation between continuous variables will be shown on the x and y axis and the discrete dimensions will be shown using radius, color and tooltips.
+    </p>
+    <p>
+        Now expand the figure by clicking and dragging the solid triangle shape you see on the right side of the figure. You can aslo drag the legend and titles of dimensions if you wish.
+        You can see that you can classify the data according to the continents by hovering the mouse over the small colored rectangles in the legend section.
+        And also you can see the country names by hovering the mouse over circles. <br>
+    </p>
+    <p>
+        Now I want you to answer some questions <br> <br>
+        Which continent seems to have a better human index and income, also which country has the highest of both index? <br>
+        Which country has the worst of both index? <br>
+        In which continent the level of income does not increases as the development index increases? <br>
+        Which continent has the highest population countries? <br>
+        Does the income increase or decrease with human index as the population increase? <br>
+        Which country is most suprising to you?  <br>
+    </p>
+    <svg width="1800" height="600"></svg>
+    <p>
+        My answer to the last question is USA because it has a higher population than other countries with the similar index.
+        <br><br>
+        My point is you can answer a lot of questions by drawing and <span style="color: red;">interacting</span> with data. While you answer each question you see the whole figure at the same time which makes you understand the big picture and its parts much easier.
+        Imagine you just write some query and fetch the answer of each question, this only helps you to answer your questions but it will not allow you to comprehend the whole data and make comparisons and inferences.
+        <br> <br>
+        Data exploration should give you a chance to interact with data.
     </p>
     <p>
         Lets see the main function of our script
@@ -65,7 +87,9 @@
         Data we provide to the dimx and dimy function represents the data shown on the x and y axis, dimr is for the radius of circles, dimc is for the color and
         dimtt is for tooltip.  
     </p>
-<svg width="1800" height="1200"></svg>
+    <p>
+        The rest is drawing lines, circles and rectangles. If you want to see how this figure was drawn, you can look at the source code of this page as always.
+    </p>
 <script src="scatter.js" type="module"></script>
 </body>
 </html>
