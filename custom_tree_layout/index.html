@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title> Customize Tree </title>
+    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+</head>
+<body>
+    <div class="article">
+        <h1>Tree Customization</h1>
+        <p>
+            In part 1, we drew a tree on the screen.
+            In this article we will look at how we can customize this tree.
+        </p>
+            The first feature we will add is draggability. <br>
+            Although it seems difficult, it is an easy feature because the tree structure is recursive.
+            Considering that we draw the tree based on the distance of each node relative to its parent, 
+            what we need to do here is to find the new distances of the dragged node relative to its parent and 
+            call the recursive draw function for this node.
+        </p>
+        <div class="code">
+            let drag = d3.drag() <br>
+            .on('drag', function(event, d){  <br>
+                &nbsp    self._tx += event.dx  <br>
+                &nbsp    self._ty += event.dy  <br>
+                &nbsp    self.render(parent, index, isroot, render_text, EditInput, EditButton) <br>
+            })
+        </div>   
+        <p>
+            Another feature I will mention is adding a new node which is almost same as dragging. We just need to create a new node, add it to the child list of its parent and render the tree starting from the parent node.
+        </p>
+        <div class="code">
+            .on("contextmenu", function(ev){  <br>
+                &nbsp    ev.preventDefault();  <br>
+                &nbsp    const new_node = new Node()  <br>
+                &nbsp    new_node.tx(50).ty(25).txt(["new title"]) <br>
+                &nbsp    self._children.push(new_node)  <br>
+                &nbsp    self.render(parent, index, isroot, render_text, EditInput, EditButton) <br> 
+            })
+        </div>
+        <p>
+            The last feature I will mention is downloading the tree as png file. The logic is svg --> blob --> img --> canvas and save the canvas.
+            You can see how it is done in the click action of download button.
+        </p>
+        <p>
+            There is a sample tree that I have uploaded below, you can see how these functions work on this tree. <br> <br>
+            Go a head and drag any node to see the drag effect, you can double click any text to change it, right click on any parent will create a new child node, and also you can press download to download the tree as a png file.
+        </p>
+    </div>
+    <svg xmlns="http://www.w3.org/2000/svg" width="1800" height="800"></svg>
+    <div class="article">
+
+    <div id="edit-area">
+        <label for="edit-input">Edit:</label>
+        <input type="text" id="edit-input" name="edit-input">
+        <button id="edit-button">OK</button>
+    </div>
+    <div id="download-area">
+        <div id="slider-div">
+            <div id="slider-x">
+                <label for="range-x">x scale</label>
+                <input type="range" min="0" max="90" value="0" class="slider" id="range-x">
+            </div>
+            <div id="slider-y">
+                <label for="range-y">y scale</label>
+                <input type="range" min="0" max="90" value="0" class="slider" id="range-y">
+            </div>
+        </div>
+        <button id="download-button">Download</button>
+    </div>
+    <p>
+        <span class="solution">As always you can see the full code in the source file of this article. </span>
+    </p>
+</div>
+    <script src="tree_draw.js" type="module"></script>
+</body>
+</html>

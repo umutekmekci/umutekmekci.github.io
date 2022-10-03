@@ -1,0 +1,51 @@
+#download-area{
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-start;
+    padding-left: 25px;
+}
+
+#download-button{
+    margin-left: 10px;
+}
+svg {
+    margin-top: -20px;
+    margin-bottom: -200px;
+}
+
+.solution {
+    color:darkred;
+}
+
+.article{
+    margin-top: 20px;
+    width: 60%;
+    margin: 0 auto;
+
+}
+
+.code {
+    background: #1b1b1b;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    color: aliceblue;
+    page-break-inside: avoid;
+    font-family: monospace;
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 1.6em;
+    max-width: 100%;
+    overflow: auto;
+    padding: 1em 1.5em;
+    word-wrap: break-word;
+}
+
+.variable{
+    color:blue;
+    font-family: monospace;
+    font-size: 15px;
+}
+
+h1 {
+    text-align: center;
+}

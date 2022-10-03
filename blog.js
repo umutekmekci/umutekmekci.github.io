@@ -127,9 +127,16 @@ article2
 const article3 = new Article()
 article3
 .ref("../tree_layout/index.html")
-.header("Tree Layout Algorithm")
+.header("Tree Layout Algorithm (Part1)")
 .meta("Posted on 24.09.2022")
-.summary("How to layout and draw a tree given as a json format")
+.summary("How to layout and draw a tree given as a json format (Part1)")
+
+const article4 = new Article()
+article4
+.ref("../custom_tree_layout/index.html")
+.header("Tree Layout Algorithm (Part2)")
+.meta("Posted on 24.09.2022")
+.summary("Customize the Tree (Drag, Change, Add node and Download)")
 
 const blog = new Blog()
 blog
@@ -138,6 +145,7 @@ blog
 .append(article1)
 .append(article2)
 .append(article3)
+.append(article4)
 .render()
 
 window.addEventListener('resize', (event) => {
