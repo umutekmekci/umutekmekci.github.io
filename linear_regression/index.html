@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Two Prespectives of Linear Regression</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <div class="article">
+        <h2>
+            Wedge Product Prespective
+        </h2>
+        Lets assume we are given:
+        <p>
+             \( a w_{1} + b w_{2} + c w_{3} = z \) 
+        </p>
+        <p>
+             where \( a \), \( b \), \( c \) and \( z \) are vectors and \( w_{1} \), \( w_{2} \) and \( w_{3} \) are scalares.
+        </p>
+
+        <p>
+            Lets ask our self how can we get rid of \( w_{1} \) from left and right side of the equation. The only way is to get rid of \( a w_{1} \) term.
+        </p>
+        <p>
+            Lets imagine there is an operator called \( op(a,b) \), but special thing about this operator is \( op(a,a) = 0 \), when the arguments are same vectors operator gives zero.
+        </p>
+        <p>
+            Lets apply this operator \( op(a,?) \) to both size of the equation, as you see we already gave the first argument as vector \( a \).
+        </p>
+        <p>
+            \( op(a,a) w_{1} + op(a,b) w_{2} + op(a,c) w_{3} = op(a,z) \) &nbsp where \( op(a,a) w_{1} = 0 \)
+        </p>
+        <p>
+            We can continue with \( op(b, ?) \) to get rid of \( w_{2} \)
+        </p>
+        <p>
+            \( op(b, op(a,b)) w_{2} + op(b, op(a,c)) w_{3} = op(b, op(a,z)) \) &nbsp &nbsp for now assume \( op(b, op(a,b)) = op(a, op(b,b)) \) which equals to 0 
+        </p>
+            So  \( w_{3} = \frac{op(a,op(b,z))}{op(a, op(b,c))} \)
+        <p>
+            Ok but how can we calculate \( op(a,b) \), lets try to find out by applying what we know about this operator. We know that \( op(a,a) = 0 \), so lets start from there.
+        </p>
+        <p>
+            Lets assume \( a \) is a two dimesional vector which is \( [a_{1} e_{1}, a_{2} e_{2}] \) where \( e_{1} \) and \( e_{2} \) are units and \(a_{1} \) and \( a_{2} \) are scalars.
+        </p>
+        <p>
+            \( op(a,a) =  a_{1}^2 op(e_{1}, e_{1}) +  a_{1} a_{2} op(e_{1}, e_{2}) + a_{2} a_{1} op(e_{2}, e_{1})  + a_{2}^2 op(e_{2}, e_{2})  \)
+        </p>
+        <p>
+            Because of definition \( op(e_{1}, e_{1}) \) and \( op(e_{2}, e_{2}) \) are zero. In order to make the \( op(a,a) \) zero we should define that \( op(e_{1}, e_{2}) = -op(e_{2}, e_{1}) \)
+        </p>
+        <p>
+            When you follow the same logic with three dimensional vector \( a \) you will see that \( e_{1} e_{2} e_{3}  = -e_{2} e_{1} e_{3}\), so when you switch any two sequential units you need to change the sign.
+        </p>
+        <p>
+            By giving units to vectors and defining relations between units we created a computable operator. Also if you remember determinant operator, you will realize the similarity between them.
+
+            We are going to call it wedge product and show as \( \wedge \). Based on what we know about determinants we can assume that \( \wedge \) product gives the area of parallelogram of vectors and also can be expressed as \( a \wedge b = |a||b|sin(\theta) \) 
+        </p>
+        <p>
+            The last formula must be familiar to you. if you replace \( sin(\theta) \) by \( cos(\theta) \) then this is the formula of dot product. Now we can say that wedge product and dot product are complementary. What we mean by complementary is if we know both wedge  and dot product of two vectors we can obtain back one of the terms by knowing the result and the other term. Which is impossible by just dot product \( a \bullet b = c\) we can not find \( a \) by knowing \(b \) and \( c \).
+        </p>
+        <p>
+            \( w_{1} = \frac{b \wedge c \wedge z}{a \wedge b \wedge c} \), \( w_{2} = \frac{a \wedge c \wedge z}{a \wedge b \wedge c} \), \( w_{3} = \frac{a \wedge b \wedge z}{a \wedge b \wedge c} \)
+        </p>
+        <p>
+            Now you also know where the crammer solution is coming from.
+        </p>
+        <h2>
+            Dot Product Perspective
+        </h2>
+        <p>
+            \( a w_{1} + b w_{2} + c w_{3} = z \) 
+       </p>
+       <p>
+           If vectors are 100 dimensional, more equations than unkown variables, then we can not get rid of \( w_{1}, w_{2}, w_{3} \) one by one as we did above.
+       </p>
+       <p>
+            But we can follow the same strategy here. Lets apply \( a \bullet ? \) operator to both sides.
+        </p>
+        <p>
+            \( a \bullet a w_{1} +  a \bullet b w_{2} + a \bullet c w_{3}\ = a \bullet z\)
+        </p>
+        <p>
+            Since the result of dot product is a scalar, we have an equation with three unknown variables. Ok we can continue with \( b \bullet ? \) and \( c \bullet ? \) operators.
+        </p>
+        <p>
+            \( a \bullet a w_{1} +  a \bullet b w_{2} + a \bullet c w_{3}\ = a \bullet z\) <br>
+            \( b \bullet a w_{1} +  b \bullet b w_{2} + b \bullet c w_{3}\ = b \bullet z\) <br>
+            \( c \bullet a w_{1} +  c \bullet b w_{2} + c \bullet c w_{3}\ = c \bullet z\)
+        </p>
+        <p>
+            Now we have three equations with three unkowns, so we can solve this system of equations.
+        </p>
+        <p>
+            If you realized we could select any three random vectors inside the operators, at the end we still have three equations with three unkowns. So we can use this and be smart while selecting vectors inside the operators.
+            We can select the first operator as before \( a \bullet ?\), second operator \( x \bullet ?\) and third one \( y \bullet ?\). When we look at the second equation we quickly realize that
+            if x is orthogonal to a then our second equation will be simpler, also if y is both orthogonal to a and b out third equation is more simpler and also solving the final system of equations will be even more simpler. You can use Gram-Schmidt method to find orthogonal vectors. 
+        </p>
+        <p>
+            If you are familiar with linear algebra you can realize that first startegy equals to normal equations and the second stratgey equals to \( QR\) decomposition.
+        </p>
+    </div>
+
+    
+</body>
+</html>

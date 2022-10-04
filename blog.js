@@ -114,29 +114,36 @@ const article1 = new Article()
 article1
 .ref("../scatter/index_scatter.html")
 .header("Interactive Scatter Plot")
-.meta("Posted on 03.08.2022")
+.meta("Posted on 07.08.2022")
 .summary("Through interaction we will see how a two-dimensional plot can represent four-dimensional data.")
 
 const article2 = new Article()
 article2
 .ref("../snap/index.html")
 .header("Finger Snap")
-.meta("Posted on 03.08.2022")
+.meta("Posted on 21.08.2022")
 .summary("Implemantation of thanos finger snap")
 
 const article3 = new Article()
 article3
 .ref("../tree_layout/index.html")
 .header("Tree Layout Algorithm (Part1)")
-.meta("Posted on 24.09.2022")
+.meta("Posted on 11.09.2022")
 .summary("How to layout and draw a tree given as a json format (Part1)")
 
 const article4 = new Article()
 article4
 .ref("../custom_tree_layout/index.html")
 .header("Tree Layout Algorithm (Part2)")
-.meta("Posted on 24.09.2022")
+.meta("Posted on 18.09.2022")
 .summary("Customize the Tree (Drag, Change, Add node and Download)")
+
+const article5 = new Article()
+article5
+.ref("../linear_regression/index.html")
+.header("Two Perspecives of Linear Regression")
+.meta("Posted on 08.10.2022")
+.summary("Two complementary approaches for linear regression")
 
 const blog = new Blog()
 blog
@@ -146,6 +153,7 @@ blog
 .append(article2)
 .append(article3)
 .append(article4)
+.append(article5)
 .render()
 
 window.addEventListener('resize', (event) => {
