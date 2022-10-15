@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Product of two vectors using geometric algebra</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <div class="article">
+        In my previous article, I talked about wedge and dot products and how these two products are complementary to each other. What I didn't mention is that when these two products come together they form the geometric product.
+        <p>
+             \( ab = a \wedge b + a \cdot b \) 
+        </p>
+        <p>
+             where \( a \), \( b \) are vectors. For some special cases such as when \( a \) and \( b \) are orthogonal geometric product is \( ab = a \wedge b \) and
+             when  \( a \) and \( b \) are parallel geometric product is \( ab = a \cdot b \) 
+        </p>
+        <p>
+            We know that square length of a vector \( c \) is its dot product with itself \( c \cdot c \) which is also its geometric product with itself \( cc \).
+        </p>
+        <img src="./vector_sum.png"> </img>
+
+        <p>
+            \( c = a + b \) 
+        </p>
+        <p>
+            In order to find the square length of \( c \) we can calculate \(  cc \) geometric product of \( c \) by itself.
+        </p>
+        <p>
+            \(  cc = (a+b)(a+b) = aa + ab + ba + bb \)  &nbsp where \( ab = a \wedge b + a \cdot b \) &nbsp and &nbsp \( ba = b \wedge a + b \cdot a \)
+        </p>
+        <p>
+            We know from the previous article that \( a \wedge b = -b \wedge a \)  so terms \( a \wedge b \) and \( b \wedge a \) cancels each other and
+        </p>
+        <p>
+            \( cc = a \cdot a + b \cdot b + 2 a \cdot b \).
+        </p>
+        <p>
+            The square length of vector \( c \) is is the sum of square length of vectors \( a \), \( b \) and their dot product.
+        </p>
+        <p>
+            In case \( a \) and \( b \) are orthogonal, their dot product is zero so square length of \( c \) is just
+        </p>
+        <p>
+            \( cc = aa + bb  == |c|^2 = |a|^2 + |b|^2 \)
+        </p>
+            
+    </div>
+
+    
+</body>
+</html>

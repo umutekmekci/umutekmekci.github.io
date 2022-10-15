@@ -145,6 +145,13 @@ article5
 .meta("Posted on 08.10.2022")
 .summary("Two complementary approaches for linear regression")
 
+const article6 = new Article()
+article6
+.ref("../length_of_vector/index.html")
+.header("Geometric Product of Two Vectors")
+.meta("Posted on 16.10.2022")
+.summary("Do you wonder why |a|<sup>2</sup> + |b|<sup>2</sup> = |c|<sup>2</sup> in case a ,b and c are vectors with a and b orthogonal to each other")
+
 const blog = new Blog()
 blog
 .width(window.innerWidth)
@@ -154,6 +161,7 @@ blog
 .append(article3)
 .append(article4)
 .append(article5)
+.append(article6)
 .render()
 
 window.addEventListener('resize', (event) => {
